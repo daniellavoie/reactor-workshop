@@ -1,0 +1,19 @@
+version: '2.2'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: reactive-rabbitmq-1
+    ports:
+    - 5672:5672
+    - 15672:15672
+
+  mongo:
+    image: mongo
+    ports:
+    - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
