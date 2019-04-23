@@ -1,8 +1,5 @@
 package dev.daniellavoie.reactor.workshop.trade;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,14 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import dev.daniellavoie.reactor.workshop.model.OrderExecution;
-import dev.daniellavoie.reactor.workshop.model.Trade;
 import reactor.rabbitmq.Receiver;
 
 @Service
 public class TradeServiceImpl implements TradeService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TradeServiceImpl.class);
-	
+
 	private final TradeRepository tradeRepository;
 	private final Receiver receiver;
 	private final String queue;
@@ -33,26 +28,17 @@ public class TradeServiceImpl implements TradeService {
 
 	@Override
 	public void initialize() {
-		receiver.consumeAutoAck(queue)
+		// Step 1 - subscribe with auto-ack to the queue.
 
-				.map(delivery -> delivery.getBody())
+		// Step 2 - Access the message body.
 
-				.map(this::readValue)
+		// Step 3 - unmarshal the message body.
 
-				.map(orderExecution -> new Trade(null, orderExecution, LocalDateTime.now()))
+		// Step 4 - Transform the execution order into an actual trade.
 
-				.flatMap(tradeRepository::save)
+		// Step 5 - Persist the trade to MongoDB
 
-				.doOnError(throwable -> LOGGER.error("Error while processing order executions.", throwable))
+		// Step 6 - Log any error that might occurs while processing the queue.
 
-				.subscribe();
-	}
-
-	public OrderExecution readValue(byte[] bytes) {
-		try {
-			return objectMapper.readValue(bytes, OrderExecution.class);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
 	}
 }

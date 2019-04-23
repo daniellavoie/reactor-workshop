@@ -49,13 +49,11 @@ public class OrderBookServiceImpl implements OrderBookService {
 	@Override
 	public Flux<OrderBookNotification> orderBookStream(ProductId[] productIds) {
 		// Step 1 - Subscribe to order book events
-		return orderBookEventService.getEvents(productIds)
 
-				// Step 2 - Update the actual state of the order book with the event
-				.map(this::processOrderBookEvent)
+		// Step 2 - Update the actual state of the order book with the event
 
-				// Step 3 - Notify if the order book has changed.
-				.filter(Optional::isPresent).map(Optional::get);
+		// Step 3 - Notify if the order book has changed.
+		return null;
 	}
 
 	private void processL2Update(OrderBookEvent orderBookEvent, OrderBook orderBook) {

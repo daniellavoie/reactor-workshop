@@ -18,7 +18,8 @@ public class OrderExecutionController {
 	}
 
 	@PostMapping
-	public Mono<Void> executeOrder(@RequestBody Mono<OrderExecution> orderExecution) {
-		return orderExecution.flatMap(orderExecutionService::sendOrderExecutionMessage);
+	public Mono<Void> executeOrder(@RequestBody Mono<OrderExecution> orderExecutionPublisher) {
+		// Step 1 - Send an order execution message when the request body is notified.
+		return null;
 	}
 }

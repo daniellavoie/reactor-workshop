@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dev.daniellavoie.reactor.workshop.model.OrderExecution;
 import reactor.core.publisher.Mono;
-import reactor.rabbitmq.OutboundMessage;
 import reactor.rabbitmq.Sender;
 
 @Service
@@ -30,10 +29,9 @@ public class OrderExecutionServiceImpl implements OrderExecutionService {
 	@Override
 	public Mono<Void> sendOrderExecutionMessage(OrderExecution orderExecution) {
 		// Step 1 - Generate an OutboundMessage.
-		OutboundMessage message = new OutboundMessage(exchange, routingKey, writeValue(orderExecution));
 
 		// Step 2 - Send the output message using a Sender.
-		return sender.send(Mono.just(message));
+		return null;
 	}
 
 	private byte[] writeValue(OrderExecution orderExecution) {

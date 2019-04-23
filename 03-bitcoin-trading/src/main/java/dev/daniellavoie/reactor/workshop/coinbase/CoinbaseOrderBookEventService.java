@@ -1,7 +1,5 @@
 package dev.daniellavoie.reactor.workshop.coinbase;
 
-import java.net.URI;
-
 import org.springframework.web.reactive.socket.client.ReactorNettyWebSocketClient;
 
 import dev.daniellavoie.reactor.workshop.coinbase.model.OrderBookEvent;
@@ -23,13 +21,9 @@ public class CoinbaseOrderBookEventService implements OrderBookEventService {
 
 	@Override
 	public Flux<OrderBookEvent> getEvents(ProductId[] productsIds) {
-		return Flux.create(sink -> webSocketClient
-
-				.execute(URI.create(coinbaseConfiguration.getWebsocketUrl()),
-						new CoinbaseWebSocketHandler(productsIds, sink))
-
-				.doOnError(sink::error)
-
-				.subscribe());
+		// Step 1 - Create a flux
+		
+		// Step 2 - Initiate a websocket connection and refer a websocket handler.
+		return null;
 	}
 }
