@@ -23,9 +23,7 @@ This application listens to crypto currencies exchange rates in real time from [
 
 ## The workshop
 
-The `master` branch contains a skeleton of the application. Some classes will require implementations and assertions 
-
-* [CoinbaseOrderBookEventServiceTest](src/test/java/dev/daniellavoie/reactor/workshop/coinbase/CoinbaseOrderBookEventServiceTest.java)
+The `master` branch contains a skeleton of the application. Some classes will require implementations for tests to pass.
 
 ### Step 1 - Order Book Event
 
